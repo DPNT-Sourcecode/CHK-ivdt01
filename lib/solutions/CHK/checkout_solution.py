@@ -10,21 +10,21 @@ class Sku:
     def calculate_price(self,amount):
         sum = 0
         if self.offer_unit and self.offer_price:
-            sum += amount // self.offer_unit * self.offer_price # in offer
-            sum += amount %  self.offer_unit * self.price       # not in offer
+            sum += amount // self.offer_unit * self.offer_price # in offers
+            sum += amount %  self.offer_unit * self.price       # not in offers
         else:
             sum += amount * self.price
         return sum
 
-store_skus = [
-    Sku('A',50, 3, 130),
-    Sku('B',30, 2, 45),
-    Sku('C',20),
-    Sku('D',15),
-]
+store_skus = {
+    'A': Sku('A', 50, 3, 130),
+    'B': Sku('B', 30, 2, 45),
+    'C': Sku('C', 20),
+    'D': Sku('D', 15),
+}
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    
     for sku in store_skus:
-        
