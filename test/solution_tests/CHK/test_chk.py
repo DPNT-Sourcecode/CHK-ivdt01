@@ -23,6 +23,3 @@ class TestChk:
         assert checkout_solution.checkout("CAABBCCAA") == 285
         assert checkout_solution.checkout("CAADBBCCAA") == 300
         assert checkout_solution.checkout("CAADBBBCCAA") == 330
-
-
-
