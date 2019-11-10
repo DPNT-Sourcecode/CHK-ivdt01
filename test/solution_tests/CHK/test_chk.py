@@ -2,6 +2,9 @@ from solutions.CHK import checkout_solution
 
 
 class TestChk:
+    def test_empty_input(self):
+        assert checkout_solution.checkout("") == 0
+
     def test_invalid_input(self):
         assert checkout_solution.checkout("XAA") == -1
         assert checkout_solution.checkout("A A") == -1
@@ -20,5 +23,6 @@ class TestChk:
         assert checkout_solution.checkout("CAABBCCAA") == 285
         assert checkout_solution.checkout("CAADBBCCAA") == 300
         assert checkout_solution.checkout("CAADBBBCCAA") == 330
+
 
 
