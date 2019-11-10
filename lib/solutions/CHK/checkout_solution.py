@@ -15,14 +15,14 @@ class Sku:
         sum = 0
 
         if self.extra_offer_unit and self.extra_offer_price:
-            in_extra_offer = amount // self.extra_offer_unit
-            sum += in_extra_offer * self.extra_offer_price
-            amount -= in_extra_offer
+            extra_offer_applies_count = amount // self.extra_offer_unit
+            sum += extra_offer_applies_count * self.extra_offer_price
+            amount -= extra_offer_applies_count * self.extra_offer_unit
 
         if self.offer_unit and self.offer_price:
-            in_offer = amount // self.offer_unit
-            sum += in_offer * self.offer_price
-            amount -= in_offer
+            offer_applies_count = amount // self.offer_unit
+            sum += offer_applies_count * self.offer_price
+            amount -= offer_applies_count * self.offer_unit
 
         sum += amount * self.price
         return sum
@@ -50,4 +50,5 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
