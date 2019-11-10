@@ -33,13 +33,14 @@ store_skus = {
     'B': Sku('B', 30, 2, 45),
     'C': Sku('C', 20),
     'D': Sku('D', 15),
+    'E': Sku('E', 40),
 }
 
 
 # skus = unicode string
 def checkout(skus):
     # for any illegal input return -1
-    if not re.search(r'^[A-D]*$', skus):
+    if not re.search(r'^[A-E]*$', skus):
         return -1
 
     # get count of each item
@@ -50,5 +51,6 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
