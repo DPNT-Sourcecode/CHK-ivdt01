@@ -9,7 +9,7 @@ class Sku:
         self.offer_unit = offer_unit
         self.offer_price = offer_price
 
-    def calculate_price(self,amount):
+    def calculate_price(self, amount):
         sum = 0
         if self.offer_unit and self.offer_price:
             sum += amount // self.offer_unit * self.offer_price # in offers
@@ -27,13 +27,18 @@ store_skus = {
 }
 
 
-# noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    # For any illegal input return -1
+    # for any illegal input return -1
     if not re.search(r'[A-D]+', skus):
         return -1
 
     # get count of each item
-    for k, v in Counter(skus):
-        pass
+    counts = Counter(skus)
+
+    # calculate price
+    sum = 0
+    for item in counts:
+        sum += store_skus[item].calculate_price(counts[item])
+    return sum
+
