@@ -3,15 +3,7 @@ from collections import Counter
 
 
 class Sku:
-    def __init__(
-            self,
-            item,
-            price,
-            offer_unit=None,
-            offer_price=None,
-            extra_offer_unit=None,
-            extra_offer_price=None,
-    ):
+    def __init__(self, item, price, offer_unit=None, offer_price=None, extra_offer_unit=None, extra_offer_price=None):
         self.item = item
         self.price = price
         self.offer_unit = offer_unit
@@ -55,11 +47,14 @@ def checkout(skus):
     item_counts = Counter(skus)
 
     # apply free unit discounts
-
+    # Note: keep this as simple as this until requirements get more complicated
+    if item_counts.get('E', 0) >= 2 and item_counts.get('B', 0) > 0:
+        item_counts['B'] -= item_counts['E'] // 2
 
     # calculate total price
     total = 0
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
