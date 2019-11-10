@@ -1,4 +1,6 @@
 import re
+from collections import Counter
+
 
 class Sku:
     def __init__(self, item, price, offer_unit=None, offer_price=None):
@@ -16,12 +18,14 @@ class Sku:
             sum += amount * self.price
         return sum
 
+
 store_skus = {
     'A': Sku('A', 50, 3, 130),
     'B': Sku('B', 30, 2, 45),
     'C': Sku('C', 20),
     'D': Sku('D', 15),
 }
+
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -31,5 +35,5 @@ def checkout(skus):
         return -1
 
     # get count of each item
-    for sku in store_skus:
+    for k, v in Counter(skus):
         pass
