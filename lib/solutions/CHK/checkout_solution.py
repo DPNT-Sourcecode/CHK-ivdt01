@@ -47,7 +47,7 @@ def checkout(skus):
     item_counts = Counter(skus)
 
     # apply free unit discounts
-    # Note: keep this as simple as this until requirements get more complicated
+    # Note: keeping this as simple as this until these requirements get more complicated
     if item_counts.get('E', 0) > 0 and item_counts.get('B', 0) > 0:
         item_counts['B'] -= item_counts['E'] // 2
         item_counts['B'] = max(item_counts['B'], 0)  # ensure B count is not negative
@@ -57,6 +57,7 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
 
