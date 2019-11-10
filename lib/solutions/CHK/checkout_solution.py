@@ -41,4 +41,3 @@ def checkout(skus):
     for item in counts:
         sum += store_skus[item].calculate_price(counts[item])
     return sum
-
