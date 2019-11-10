@@ -1,4 +1,4 @@
-
+import re
 
 class Sku:
     def __init__(self, item, price, offer_unit=None, offer_price=None):
