@@ -3,7 +3,15 @@ from collections import Counter
 
 
 class Sku:
-    def __init__(self, item, price, offer_unit=None, offer_price=None, extra_offer_unit=None, extra_offer_price=None):
+    def __init__(
+            self,
+            item,
+            price,
+            offer_unit=None,
+            offer_price=None,
+            extra_offer_unit=None,
+            extra_offer_price=None,
+    ):
         self.item = item
         self.price = price
         self.offer_unit = offer_unit
@@ -54,3 +62,4 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
