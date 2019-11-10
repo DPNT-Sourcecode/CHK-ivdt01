@@ -46,11 +46,11 @@ def checkout(skus):
     # get count of each item
     item_counts = Counter(skus)
 
+    # apply free unit discounts
+
+
     # calculate total price
     total = 0
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
-
-
-
