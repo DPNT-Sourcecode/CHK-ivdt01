@@ -26,5 +26,10 @@ store_skus = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    
+    # For any illegal input return -1
+    if not re.search(r'[A-D]+', skus):
+        return -1
+
+    # get count of each item
     for sku in store_skus:
+        pass
