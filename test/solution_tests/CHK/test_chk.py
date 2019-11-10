@@ -23,3 +23,11 @@ class TestChk:
         assert checkout_solution.checkout("CAABBCCAA") == 285
         assert checkout_solution.checkout("CAADBBCCAA") == 300
         assert checkout_solution.checkout("CAADBBBCCAA") == 330
+
+    def test_pricing_for_E_s_special_offer(self):
+        assert checkout_solution.checkout("EB") == 40 + 70
+        assert checkout_solution.checkout("EEB") == 40 + 40 + 0
+        assert checkout_solution.checkout("EE") == 40 + 40
+        assert checkout_solution.checkout("EEEEEB") == 40 + 40
+
+

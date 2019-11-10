@@ -48,13 +48,15 @@ def checkout(skus):
 
     # apply free unit discounts
     # Note: keep this as simple as this until requirements get more complicated
-    if item_counts.get('E', 0) >= 2 and item_counts.get('B', 0) > 0:
+    if item_counts.get('E', 0) > 0 and item_counts.get('B', 0) > 0:
         item_counts['B'] -= item_counts['E'] // 2
+        item_counts['B'] = max(item_counts['B'], 0)  # ensure B count is not negative
 
     # calculate total price
     total = 0
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
