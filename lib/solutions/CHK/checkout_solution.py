@@ -29,7 +29,7 @@ class Sku:
         return sum
 
     def apply_free_item_offer(self, basket_counts):
-        if self.free_item_for_two and basket_counts.get(self.free_item_for_two,0) > 0:
+        if self.free_item_for_two and basket_counts.get(self.free_item_for_two, 0) > 0:
             # reduce free item's count by the number of times we could apply the free item offer
             basket_counts[self.free_item_for_two] -= basket_counts[self.item] // 2
             # ensure free item's count is not negative
@@ -55,18 +55,13 @@ def checkout(skus):
     # get count of each item
     item_counts = Counter(skus)
 
-    # apply free unit discounts
-    for item in item_counts:
-
-
-    # Note: keeping this as simple as this until these requirements get more complicated
-    if item_counts.get('E', 0) > 0 and item_counts.get('B', 0) > 0:
-        item_counts['B'] -= item_counts['E'] // 2
-        item_counts['B'] = max(item_counts['B'], 0)  # ensure B count is not negative
+    # apply free item offers
+    [store_skus[item].apply_free_item_offer(item_counts) for item in item_counts]
 
     # calculate total price
     total = 0
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
