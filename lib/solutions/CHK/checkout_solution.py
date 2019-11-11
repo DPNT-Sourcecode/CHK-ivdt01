@@ -88,12 +88,15 @@ def checkout(skus):
 
     total = 0
     # apply group discount
-    group_offer_skus = 'STXYZ'
+    # sort list by sku price in descending order, chop off most expensive ones in batches of 3
+    group_offer_items = 'STXYZ'
     group_offer_list = []
     for sku in skus:
-        if sku in group_offer_skus:
+        if sku in group_offer_items:
+            item_counts[sku] = 0
             group_offer_list += sku
     group_offer_list = sorted(group_offer_list, key=lambda s: store_skus[s].price, reverse=True)
+    group_count = group_offer_list // 5
 
 
     YXZZ
@@ -102,6 +105,7 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
 
