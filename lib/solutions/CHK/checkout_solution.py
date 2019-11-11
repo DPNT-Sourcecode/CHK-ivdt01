@@ -93,14 +93,15 @@ def checkout(skus):
     for sku in skus:
         if sku in group_offer_skus:
             group_offer_list += sku
-    group_offer_list = sorted(group_offer_list, key = lambda s: (i[''], reverse=True)
+    group_offer_list = sorted(group_offer_list, key=lambda s: store_skus[s].price, reverse=True)
 
 
     YXZZ
-
+    ZZYX
     # calculate total price for basket
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
