@@ -15,7 +15,7 @@ class TestChk:
         assert checkout_solution.checkout("C") == 20
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
-        assert checkout_solution.checkout("F") == 40
+        assert checkout_solution.checkout("F") == 10
 
     def test_pricing_for_one_item(self):
         assert checkout_solution.checkout("B") == 30
@@ -62,4 +62,5 @@ class TestChk:
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFF") == 40
         assert checkout_solution.checkout("FFFFFF") == 40
+
 
