@@ -28,6 +28,13 @@ class Sku:
         sum += amount * self.price
         return sum
 
+    def apply_free_item_offer(self, basket_counts):
+        if self.free_item_for_two and basket_counts.get(self.free_item_for_two,0) > 0:
+            # reduce free item's count by the number of times we could apply the free item offer
+            basket_counts[self.free_item_for_two] -= basket_counts[self.item] // 2
+            # ensure free item's count is not negative
+            basket_counts[self.free_item_for_two] = max(basket_counts[self.free_item_for_two], 0)
+
 
 store_skus = {
     'A': Sku('A', 50, 3, 130, 5, 200),
@@ -42,13 +49,16 @@ store_skus = {
 # skus = unicode string
 def checkout(skus):
     # for any illegal input return -1
-    if not re.search(r'^[A-E]*$', skus):
+    if not re.search(r'^[A-F]*$', skus):
         return -1
 
     # get count of each item
     item_counts = Counter(skus)
 
     # apply free unit discounts
+    for item in item_counts:
+
+
     # Note: keeping this as simple as this until these requirements get more complicated
     if item_counts.get('E', 0) > 0 and item_counts.get('B', 0) > 0:
         item_counts['B'] -= item_counts['E'] // 2
@@ -59,3 +69,4 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
