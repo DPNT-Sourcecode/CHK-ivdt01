@@ -42,7 +42,7 @@ store_skus = {
     'C': Sku('C', 20),
     'D': Sku('D', 15),
     'E': Sku('E', 40, free_item_for_two='B'),
-    'F': Sku('E', 40, free_item_for_two='F'),
+    'F': Sku('F', 10, free_item_for_two='F'),
 }
 
 
@@ -63,5 +63,6 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 

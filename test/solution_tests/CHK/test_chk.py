@@ -15,6 +15,7 @@ class TestChk:
         assert checkout_solution.checkout("C") == 20
         assert checkout_solution.checkout("D") == 15
         assert checkout_solution.checkout("E") == 40
+        assert checkout_solution.checkout("F") == 40
 
     def test_pricing_for_one_item(self):
         assert checkout_solution.checkout("B") == 30
@@ -53,3 +54,12 @@ class TestChk:
         assert checkout_solution.checkout("EEEEEBB") == 40 * 5 + 0 + 0
         assert checkout_solution.checkout("EEEEEBBB") == 40 * 5 + 0 + 0 + 30
         assert checkout_solution.checkout("EEEEEBBBB") == 40 * 5 + 0 + 0 + 45
+
+    def test_pricing_for_f_s_special_offer(self):
+        assert checkout_solution.checkout("F") == 10
+        assert checkout_solution.checkout("FF") == 20
+        assert checkout_solution.checkout("FFF") == 20
+        assert checkout_solution.checkout("FFFF") == 30
+        assert checkout_solution.checkout("FFFFF") == 40
+        assert checkout_solution.checkout("FFFFFF") == 40
+
