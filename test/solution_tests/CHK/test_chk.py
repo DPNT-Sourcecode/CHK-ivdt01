@@ -62,3 +62,15 @@ class TestChk:
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFF") == 40
         assert checkout_solution.checkout("FFFFFF") == 40
+
+    def test_group_offer(self):
+        assert checkout_solution.checkout("S") == 20
+        assert checkout_solution.checkout("X") == 17
+        assert checkout_solution.checkout("TY") == 40
+        assert checkout_solution.checkout("SXT") == 45
+        assert checkout_solution.checkout("ZXY") == 45
+        assert checkout_solution.checkout("ZTXZ") == 45 + 17
+        assert checkout_solution.checkout("ZTXZX") == 45 + 17 * 2
+        assert checkout_solution.checkout("XTXZZ") == 45 + 17 * 2
+        assert checkout_solution.checkout("XTXZZA") == 45 + 17 * 2 + 50
+        assert checkout_solution.checkout("ZZXTZXZ") == 45 * 2 + 17
