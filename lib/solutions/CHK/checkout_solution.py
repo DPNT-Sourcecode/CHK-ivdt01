@@ -51,7 +51,26 @@ store_skus = {
     'D': Sku('D', 15),
     'E': Sku('E', 40, free_offer_unit=2, free_offer_item='B'),
     'F': Sku('F', 10, free_offer_unit=2, free_offer_item='F'),
-    'G': Sku('C', 20),
+    'G': Sku('G', 20),
+    'H': Sku('H', 10, offer_unit=5, offer_price=45, extra_offer_unit=10, extra_offer_price=80),
+    'I': Sku('I', 35),
+    'J': Sku('J', 60),
+    'K': Sku('K', 80, offer_unit=2, offer_price=150),
+    'L': Sku('L', 90),
+    'M': Sku('M', 15),
+    'N': Sku('N', 40, free_offer_unit=3, free_offer_item='M'),
+    'O': Sku('O', 10),
+    'P': Sku('P', 50, offer_unit=5, offer_price=200),
+    'Q': Sku('Q', 30, offer_unit=3, offer_price=80),
+    'R': Sku('R', 50),
+    'S': Sku('S', 30),
+    'T': Sku('T', 20),
+    'U': Sku('U', 40),
+    'V': Sku('V', 50, offer_unit=2, offer_price=90, extra_offer_unit=3, extra_offer_price=130),
+    'W': Sku('W', 20),
+    'X': Sku('X', 90),
+    'Y': Sku('Y', 10),
+    'Z': Sku('Z', 50),
 }
 
 
@@ -72,5 +91,6 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
 
