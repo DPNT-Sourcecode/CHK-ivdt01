@@ -91,6 +91,7 @@ def _apply_group_discount(skus, item_counts):
         item_counts[sku] += 1
     return total
 
+
 # skus = unicode string
 def checkout(skus):
     # for any illegal input return -1
@@ -110,4 +111,5 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 

@@ -74,3 +74,4 @@ class TestChk:
         assert checkout_solution.checkout("XTXZZ") == 45 + 17 * 2
         assert checkout_solution.checkout("XTXZZA") == 45 + 17 * 2 + 50
         assert checkout_solution.checkout("ZZXTZXZ") == 45 * 2 + 17
+
