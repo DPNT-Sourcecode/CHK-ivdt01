@@ -3,13 +3,18 @@ from collections import Counter
 
 
 class Sku:
-    def __init__(self, item, price, offer_unit=None, offer_price=None, extra_offer_unit=None, extra_offer_price=None):
+    def __init__(self, item, price,
+                 offer_unit=None, offer_price=None,
+                 extra_offer_unit=None, extra_offer_price=None,
+                 free_offer_unit=None, free_offer_item=None, ):
         self.item = item
         self.price = price
         self.offer_unit = offer_unit
         self.offer_price = offer_price
         self.extra_offer_unit = extra_offer_unit
         self.extra_offer_price = extra_offer_price
+        self.free_offer_unit = free_offer_unit
+        self.free_offer_item = free_offer_item
 
     def calculate_price(self, amount):
         sum = 0
@@ -27,14 +32,24 @@ class Sku:
         sum += amount * self.price
         return sum
 
+    def apply_free_item_offer(self, basket_counts):
+        if self.free_offer_unit and self.free_offer_item:
+            if basket_counts.get(self.free_offer_item, 0) > 0:
+                # reduce free item's count by the number of times we could apply the free item offer
+                if self.free_offer_item == self.item:
+                    self.free_offer_unit += 1
+                basket_counts[self.free_offer_item] -= basket_counts[self.item] // self.free_offer_unit
+                # ensure free item's count is not negative
+                basket_counts[self.free_offer_item] = max(basket_counts[self.free_offer_item], 0)
+
 
 store_skus = {
-    'A': Sku('A', 50, 3, 130, 5, 200),
-    'B': Sku('B', 30, 2, 45),
+    'A': Sku('A', 50, offer_unit=3, offer_price=130, extra_offer_unit=5, extra_offer_price=200),
+    'B': Sku('B', 30, offer_unit=2, offer_price=45),
     'C': Sku('C', 20),
     'D': Sku('D', 15),
-    'E': Sku('E', 40),
-    'F': Sku('F', 10, 3, 20),
+    'E': Sku('E', 40, free_offer_unit=2, free_offer_item='B'),
+    'F': Sku('F', 10, free_offer_unit=2, free_offer_item='F'),
 }
 
 
@@ -47,14 +62,12 @@ def checkout(skus):
     # get count of each item
     item_counts = Counter(skus)
 
-    # apply E's special unit discount
-    # Note: keeping this as simple as this until these requirements get more complicated
-    if item_counts.get('E', 0) > 0 and item_counts.get('B', 0) > 0:
-        item_counts['B'] -= item_counts['E'] // 2
-        item_counts['B'] = max(item_counts['B'], 0)  # ensure B count is not negative
+    # apply free unit discounts
+    [store_skus[item].apply_free_item_offer(item_counts) for item in item_counts]
 
     # calculate total price
     total = 0
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
