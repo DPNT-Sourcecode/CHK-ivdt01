@@ -29,7 +29,7 @@ class Sku:
 
 
 store_skus = {
-    'A': Sku('A', 50, 3, 130),
+    'A': Sku('A', 50, 3, 130, 5, 200),
     'B': Sku('B', 30, 2, 45),
     'C': Sku('C', 20),
     'D': Sku('D', 15),
@@ -57,3 +57,4 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+

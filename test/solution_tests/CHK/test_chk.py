@@ -17,9 +17,9 @@ class TestChk:
         assert checkout_solution.checkout("AAAAA") == 200
         assert checkout_solution.checkout("AAAAAA") == 250
         assert checkout_solution.checkout("AAAAAAA") == 300
-        assert checkout_solution.checkout("AAAAAAAA") == 360
-        assert checkout_solution.checkout("AAAAAAAAA") == 390
-        assert checkout_solution.checkout("AAAAAAAAAA") == 440
+        assert checkout_solution.checkout("AAAAAAAA") == 330
+        assert checkout_solution.checkout("AAAAAAAAA") == 380
+        assert checkout_solution.checkout("AAAAAAAAAA") == 400
 
     def test_pricing_for_multiple_items(self):
         assert checkout_solution.checkout("AACAA") == 200
@@ -38,3 +38,4 @@ class TestChk:
         assert checkout_solution.checkout("EEEEEBB") == 40 * 5 + 0 + 0
         assert checkout_solution.checkout("EEEEEBBB") == 40 * 5 + 0 + 0 + 30
         assert checkout_solution.checkout("EEEEEBBBB") == 40 * 5 + 0 + 0 + 45
+
