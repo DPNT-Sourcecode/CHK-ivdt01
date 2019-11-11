@@ -17,6 +17,23 @@ class TestChk:
         assert checkout_solution.checkout("E") == 40
 
     def test_pricing_for_one_item(self):
+        assert checkout_solution.checkout("B") == 30
+        assert checkout_solution.checkout("BB") == 45
+        assert checkout_solution.checkout("BBB") == 75
+        assert checkout_solution.checkout("BBBB") == 90
+        assert checkout_solution.checkout("BBBBB") == 120
+        assert checkout_solution.checkout("BBBBBB") == 135
+    
+    def test_pricing_for_multiple_items(self):
+        assert checkout_solution.checkout("AACAA") == 200
+        assert checkout_solution.checkout("AACCAA") == 220
+        assert checkout_solution.checkout("CAACCAA") == 240
+        assert checkout_solution.checkout("CAABCCAA") == 270
+        assert checkout_solution.checkout("CAABBCCAA") == 285
+        assert checkout_solution.checkout("CAADBBCCAA") == 300
+        assert checkout_solution.checkout("CAADBBBCCAA") == 330
+
+    def test_pricing_for_a_s_special_offers(self):
         assert checkout_solution.checkout("A") == 50
         assert checkout_solution.checkout("AA") == 100
         assert checkout_solution.checkout("AAA") == 130
@@ -28,16 +45,7 @@ class TestChk:
         assert checkout_solution.checkout("AAAAAAAAA") == 380
         assert checkout_solution.checkout("AAAAAAAAAA") == 400
 
-    def test_pricing_for_multiple_items(self):
-        assert checkout_solution.checkout("AACAA") == 200
-        assert checkout_solution.checkout("AACCAA") == 220
-        assert checkout_solution.checkout("CAACCAA") == 240
-        assert checkout_solution.checkout("CAABCCAA") == 270
-        assert checkout_solution.checkout("CAABBCCAA") == 285
-        assert checkout_solution.checkout("CAADBBCCAA") == 300
-        assert checkout_solution.checkout("CAADBBBCCAA") == 330
-
-    def test_pricing_for_E_s_special_offer(self):
+    def test_pricing_for_e_s_special_offer(self):
         assert checkout_solution.checkout("EB") == 40 + 30
         assert checkout_solution.checkout("EEB") == 40 + 40 + 0
         assert checkout_solution.checkout("EE") == 40 + 40
@@ -45,5 +53,6 @@ class TestChk:
         assert checkout_solution.checkout("EEEEEBB") == 40 * 5 + 0 + 0
         assert checkout_solution.checkout("EEEEEBBB") == 40 * 5 + 0 + 0 + 30
         assert checkout_solution.checkout("EEEEEBBBB") == 40 * 5 + 0 + 0 + 45
+
 
 
