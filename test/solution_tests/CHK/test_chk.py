@@ -6,7 +6,7 @@ class TestChk:
         assert checkout_solution.checkout("") == 0
 
     def test_invalid_input(self):
-        assert checkout_solution.checkout("XAA") == -1
+        assert checkout_solution.checkout("+AA") == -1
         assert checkout_solution.checkout("A A") == -1
 
     def test_pricing_for_single_item(self):
@@ -62,3 +62,4 @@ class TestChk:
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFF") == 40
         assert checkout_solution.checkout("FFFFFF") == 40
+
