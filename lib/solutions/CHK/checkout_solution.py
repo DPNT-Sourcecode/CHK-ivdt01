@@ -89,11 +89,17 @@ def checkout(skus):
     total = 0
     # apply group discount
     group_offer_skus = 'STXYZ'
-    group_offer_dict =
-    for item in skus:
+    group_offer_list = []
+    for sku in skus:
+        if sku in group_offer_skus:
+            group_offer_list += {sku: store_skus[sku].price}
+    group_offer_list = sorted(group_offer_list, reverse=True)
+
+
     YXZZ
 
     # calculate total price for basket
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
