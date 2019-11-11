@@ -92,8 +92,8 @@ def checkout(skus):
     group_offer_list = []
     for sku in skus:
         if sku in group_offer_skus:
-            group_offer_list += {sku: store_skus[sku].price}
-    group_offer_list = sorted(group_offer_list, reverse=True)
+            group_offer_list += sku
+    group_offer_list = sorted(group_offer_list, key = lambda s: (i[''], reverse=True)
 
 
     YXZZ
@@ -102,4 +102,5 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
