@@ -36,9 +36,10 @@ class Sku:
         if self.free_offer_unit and self.free_offer_item:
             if basket_counts.get(self.free_offer_item, 0) > 0:
                 # reduce free item's count by the number of times we could apply the free item offer
+                divider = self.free_offer_unit
                 if self.free_offer_item == self.item:
-                    self.free_offer_unit += 1
-                basket_counts[self.free_offer_item] -= basket_counts[self.item] // self.free_offer_unit
+                    divider += 1
+                basket_counts[self.free_offer_item] -= basket_counts[self.item] // divider
                 # ensure free item's count is not negative
                 basket_counts[self.free_offer_item] = max(basket_counts[self.free_offer_item], 0)
 
@@ -50,6 +51,7 @@ store_skus = {
     'D': Sku('D', 15),
     'E': Sku('E', 40, free_offer_unit=2, free_offer_item='B'),
     'F': Sku('F', 10, free_offer_unit=2, free_offer_item='F'),
+    'G': Sku('C', 20),
 }
 
 
@@ -70,4 +72,5 @@ def checkout(skus):
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
 
