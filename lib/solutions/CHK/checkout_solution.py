@@ -74,6 +74,23 @@ store_skus = {
 }
 
 
+def _apply_group_discount(skus, item_counts):
+    group_offer_list = []
+    for sku in skus:
+        if sku in 'STXYZ':
+            item_counts[sku] = 0
+            group_offer_list += sku
+    # sort basket items by sku price (e.g ZTXZ --> XTZZ)
+    group_offer_list = sorted(group_offer_list, key=lambda s: store_skus[s].price)
+    # calculate group prices for the expensive ones on the end
+    group_count = len(group_offer_list) // 3
+    total = group_count * 45
+    # add back the ones not in a group to the item_counts dictionary
+    not_in_groups = group_offer_list[: len(group_offer_list) % 3]
+    for sku in not_in_groups:
+        item_counts[sku] += 1
+    return total
+
 # skus = unicode string
 def checkout(skus):
     # for any illegal input return -1
@@ -83,25 +100,14 @@ def checkout(skus):
     # get count of each item
     item_counts = Counter(skus)
 
+    # apply group discount
+    total = _apply_group_discount(skus, item_counts)
+
     # apply free unit discounts
     [store_skus[item].apply_free_item_offer(item_counts) for item in item_counts]
 
-    total = 0
-    # apply group discount
-    # sort list by sku price in descending order, chop off most expensive ones in batches of 3
-    group_offer_items = 'STXYZ'
-    group_offer_list = []
-    for sku in skus:
-        if sku in group_offer_items:
-            item_counts[sku] = 0
-            group_offer_list += sku
-    group_offer_list = sorted(group_offer_list, key=lambda s: store_skus[s].price, reverse=True)
-    group_count = group_offer_list // 5
-
-
-    YXZZ
-    ZZYX
-    # calculate total price for basket
+    # calculate total price for basket based on counts
     for item in item_counts:
         total += store_skus[item].calculate_price(item_counts[item])
     return total
+
